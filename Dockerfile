@@ -1,8 +1,7 @@
 FROM beyondspider/java:latest
 MAINTAINER from www.beyondspider.com by admin (admin@beyondspider.com)
 
-RUN yum -y install epel-release && yum -y install pwgen autossh && \
-    ssh-keygen -t rsa -f /root/.ssh/id_rsa
+RUN yum -y install epel-release && yum -y install pwgen autossh
 
 ADD https://download.beyondspider.com/docker/apache-tomcat-9.0.21.tar.gz /tmp/apache-tomcat-9.0.21.tar.gz
 
