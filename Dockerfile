@@ -1,11 +1,10 @@
 FROM beyondspider/java:latest
 MAINTAINER from www.beyondspider.com by admin (admin@beyondspider.com)
 
-RUN yum -y install epel-release && yum -y install pwgen autossh
-
 ADD https://download.beyondspider.com/docker/apache-tomcat-9.0.21.tar.gz /tmp/apache-tomcat-9.0.21.tar.gz
 
-RUN mkdir -p /opt/tomcat && \
+RUN yum -y install autossh && \
+    mkdir -p /opt/tomcat && \
     tar -xzvf /tmp/apache-tomcat-9.0.21.tar.gz -C /opt/tomcat && \
     rm -rf /tmp/apache-tomcat-9.0.21.tar.gz
 
