@@ -1,7 +1,11 @@
 FROM beyondspider/java:latest
 MAINTAINER from www.beyondspider.com by admin (admin@beyondspider.com)
 
+RUN yum -y install epel-release && yum -y install pwgen autossh && \
+    ssh-keygen -t rsa -f /root/.ssh/id_rsa
+
 ADD https://download.beyondspider.com/docker/apache-tomcat-9.0.21.tar.gz /tmp/apache-tomcat-9.0.21.tar.gz
+
 RUN mkdir -p /opt/tomcat && \
     tar -xzvf /tmp/apache-tomcat-9.0.21.tar.gz -C /opt/tomcat && \
     rm -rf /tmp/apache-tomcat-9.0.21.tar.gz
@@ -12,6 +16,9 @@ COPY ./manager/context.xml /opt/tomcat/apache-tomcat-9.0.21/webapps/manager/META
 COPY ./host-manager/context.xml /opt/tomcat/apache-tomcat-9.0.21/webapps/host-manager/META-INF/context.xml
 
 ADD run.sh /run.sh
+ADD tomcat.sh /tomcat.sh
+ADD copy.sh /copy.sh
+ADD tunnel.sh /tunnel.sh
 
 ENV CATALINA_HOME /opt/tomcat/apache-tomcat-9.0.21
 ENV PATH $CATALINA_HOME/bin:$PATH
