@@ -1,10 +1,9 @@
 FROM beyondspider/java:latest
 MAINTAINER from www.beyondspider.com by admin (admin@beyondspider.com)
 
-ADD https://download.beyondspider.com/docker/apache-tomcat-9.0.21.tar.gz /tmp/apache-tomcat-9.0.21.tar.gz
-
 RUN yum -y install autossh && \
     mkdir -p /opt/tomcat && \
+    curl -o /tmp/apache-tomcat-9.0.21.tar.gz https://download.beyondspider.com/docker/apache-tomcat-9.0.21.tar.gz && \
     tar -xzvf /tmp/apache-tomcat-9.0.21.tar.gz -C /opt/tomcat && \
     rm -rf /tmp/apache-tomcat-9.0.21.tar.gz
 
