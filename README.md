@@ -2,20 +2,37 @@
 
 ## build
 ```bash
-./build.sh
+docker build -t beyondspider/tomcat:latest .
 ```
 
 ## start
 ```bash
-./start.sh
+docker run -u root -d \
+    --env TOMCAT_PASS=admin \
+    -p 10022:22 \
+    -p 18080:8080 \
+    --name tomcat \
+    beyondspider/tomcat:latest
+
+docker run -u root -d \
+    -p 10022:22 \
+    -p 18080:8080 \
+    --name tomcat \
+    beyondspider/tomcat:latest
 ```
 
 ## ssh
 ```bash
-./ssh.sh
+ssh root@127.0.0.1 -p 10022
+```
+
+## tunnel
+```bash
+cd /
+./tunnel.sh
 ```
 
 ## push
 ```bash
-./push.sh
+docker push beyondspider/tomcat:latest
 ```
